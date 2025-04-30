@@ -1,0 +1,89 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="../css/" />
+  </head>
+  <body>
+    <div class="status-container">
+      <h1>Virtual Pet Status</h1>
+
+      <div class="status-bar">
+        <span class="status-label">Hunger:</span>
+        <div class="status-progress">
+          <div id="hunger-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="hunger-value">70%</span>
+        <div id="hunger-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Energy:</span>
+        <div class="status-progress">
+          <div id="energy-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="energy-value">70%</span>
+        <div id="energy-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Hygiene:</span>
+        <div class="status-progress">
+          <div id="hygiene-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="hygiene-value">70%</span>
+        <div id="hygiene-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Happiness:</span>
+        <div class="status-progress">
+          <div id="happiness-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="happiness-value">70%</span>
+        <div id="happiness-warning" class="warning"></div>
+      </div>
+
+      <div class="buttons">
+        <button onclick="feedPet(currentPet)">Feed</button>
+        <button onclick="bathePet(currentPet)">Bathe</button>
+        <button onclick="bedtime(currentPet)">Sleep</button>
+        <button onclick="touchPet(currentPet)">Play</button>
+      </div>
+    </div>
+
+    <script src="backend/status.js"></script>
+    <script>
+      // Initialize with a random pet
+      let currentPet = getRandomPersonality();
+
+      // Update status bars
+      function updateStatusBars() {
+        document.getElementById("hunger-bar").style.width = hunger + "%";
+        document.getElementById("energy-bar").style.width = energy + "%";
+        document.getElementById("hygiene-bar").style.width = hygiene + "%";
+        document.getElementById("happiness-bar").style.width = happiness + "%";
+
+        document.getElementById("hunger-value").textContent = hunger + "%";
+        document.getElementById("energy-value").textContent = energy + "%";
+        document.getElementById("hygiene-value").textContent = hygiene + "%";
+        document.getElementById("happiness-value").textContent =
+          happiness + "%";
+      }
+
+      // Override console.log to update UI
+      const originalConsoleLog = console.log;
+      console.log = function () {
+        originalConsoleLog.apply(console, arguments);
+        updateStatusBars();
+      };
+
+      // Initial update
+      updateStatusBars();
+    </script>
+  </body>
+</html>

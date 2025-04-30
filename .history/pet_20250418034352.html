@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Pet Game</h1>
+        <h2>Meet your pet!</h2>
+        <p id="pet-intro"></p>
+        
+        <div class="status-bar">
+            <span>Hunger: <span id="hunger-status">70</span></span>
+            <span>Energy: <span id="energy-status">70</span></span>
+            <span>Hygiene: <span id="hygiene-status">70</span></span>
+            <span>Happiness: <span id="happiness-status">70</span></span>
+        </div>
+
+        <button class="action-btn" onclick="touchPet(mix1)">Pet</button>
+        <button class="action-btn" onclick="feedPet(mix1)">Feed</button>
+        <button class="action-btn" onclick="bathePet(mix1)">Bathe</button>
+        <button class="action-btn" onclick="bedtime(mix1)">Bedtime</button>
+    </div>
+
+    <script src="petGame.js"></script>
+    <script>
+        // Display pet introduction text
+        document.getElementById('pet-intro').innerText = mix1.intro;
+
+        // Update the status bar in real-time
+        setInterval(() => {
+            document.getElementById('hunger-status').innerText = hunger;
+            document.getElementById('energy-status').innerText = energy;
+            document.getElementById('hygiene-status').innerText = hygiene;
+            document.getElementById('happiness-status').innerText = happiness;
+        }, 1000);
+    </script>
+</body>
+</html>
