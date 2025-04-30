@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Button Section -->
+        <div class="buttons">
+            <button class="action-btn" onclick="feedPet(mix1)">Feed</button>
+            <button class="action-btn" onclick="bathePet(mix1)">Bathe</button>
+            <button class="action-btn" onclick="bedtime(mix1)">Sleep</button>
+            <button class="action-btn" onclick="touchPet(mix1)">Play</button>
+        </div>
+
+        <!-- Status Bar Section -->
+        <div class="status-bar">
+            <!-- Top Bar: Hunger and Energy -->
+            <div class="status-row">
+                <img src="images/hunger.svg" alt="Hunger Icon" class="status-icon">
+                <div class="bar" id="hunger-bar"></div>
+            </div>
+            <div class="status-row">
+                <img src="images/energy.svg" alt="Energy Icon" class="status-icon">
+                <div class="bar" id="energy-bar"></div>
+            </div>
+
+            <!-- Bottom Bar: Happiness and Hygiene -->
+            <div class="status-row">
+                <img src="images/happiness.svg" alt="Happiness Icon" class="status-icon">
+                <div class="bar" id="happiness-bar"></div>
+            </div>
+            <div class="status-row">
+                <img src="images/hygiene.svg" alt="Hygiene Icon" class="status-icon">
+                <div class="bar" id="hygiene-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="petGame.js"></script>
+    <script>
+        // Update bars in real-time
+        setInterval(() => {
+            document.getElementById('hunger-bar').style.width = `${hunger}%`;
+            document.getElementById('energy-bar').style.width = `${energy}%`;
+            document.getElementById('happiness-bar').style.width = `${happiness}%`;
+            document.getElementById('hygiene-bar').style.width = `${hygiene}%`;
+        }, 1000);
+    </script>
+</body>
+</html>
+
+    <script src="backend/backend.js"></script>
+</body>
+</html>
