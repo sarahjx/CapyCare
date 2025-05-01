@@ -53,11 +53,16 @@ let happinessInterval = null;
 
 // Initialize the game
 function initializeGame() {
+  console.log("Initializing game...");
   currentPet = getRandomPersonality();
   hunger = 100;
   energy = 100;
   hygiene = 100;
   happiness = 100;
+  isGameOver = false;
+  isPaused = false;
+
+  console.log("Initial values:", { hunger, energy, hygiene, happiness });
   updateStatusBars();
   updateIntervals();
 }
@@ -71,79 +76,94 @@ function getRandomPersonality() {
 
 // Personality-based status decrease functions
 function decreaseHunger() {
-  if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.foodLover ? 15 : 10;
+  console.log("Decreasing hunger...");
+  if (!currentPet || isGameOver || isPaused) {
+    console.log("Cannot decrease hunger:", {
+      currentPet,
+      isGameOver,
+      isPaused,
+    });
+    return;
+  }
+  const decreaseAmount = currentPet.foodLover ? 5 : 3;
   hunger = Math.max(0, hunger - decreaseAmount);
+  console.log("New hunger value:", hunger);
   updateStatusBars();
   if (hunger === 0 && checkGameOver()) return;
 }
 
 function decreaseEnergy() {
-  if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.active ? 15 : 10;
+  console.log("Decreasing energy...");
+  if (!currentPet || isGameOver || isPaused) {
+    console.log("Cannot decrease energy:", {
+      currentPet,
+      isGameOver,
+      isPaused,
+    });
+    return;
+  }
+  const decreaseAmount = currentPet.active ? 5 : 3;
   energy = Math.max(0, energy - decreaseAmount);
+  console.log("New energy value:", energy);
   updateStatusBars();
   if (energy === 0 && checkGameOver()) return;
 }
 
 function decreaseHygiene() {
-  if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.clean ? 8 : 12;
+  console.log("Decreasing hygiene...");
+  if (!currentPet || isGameOver || isPaused) {
+    console.log("Cannot decrease hygiene:", {
+      currentPet,
+      isGameOver,
+      isPaused,
+    });
+    return;
+  }
+  const decreaseAmount = currentPet.clean ? 3 : 4;
   hygiene = Math.max(0, hygiene - decreaseAmount);
+  console.log("New hygiene value:", hygiene);
   updateStatusBars();
   if (hygiene === 0 && checkGameOver()) return;
 }
 
 function decreaseHappiness() {
-  if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.clingy ? 15 : 10;
+  console.log("Decreasing happiness...");
+  if (!currentPet || isGameOver || isPaused) {
+    console.log("Cannot decrease happiness:", {
+      currentPet,
+      isGameOver,
+      isPaused,
+    });
+    return;
+  }
+  const decreaseAmount = currentPet.clingy ? 5 : 3;
   happiness = Math.max(0, happiness - decreaseAmount);
+  console.log("New happiness value:", happiness);
   updateStatusBars();
   if (happiness === 0 && checkGameOver()) return;
 }
 
 // Update intervals with personality-based timing
 function updateIntervals() {
+  console.log("Updating intervals...");
   // Clear any existing intervals
   if (hungerInterval) clearInterval(hungerInterval);
   if (energyInterval) clearInterval(energyInterval);
   if (hygieneInterval) clearInterval(hygieneInterval);
   if (happinessInterval) clearInterval(happinessInterval);
 
-  // Set new intervals based on personality
-  hungerInterval = setInterval(
-    () => {
-      decreaseHunger();
-      warning();
-    },
-    currentPet.foodLover ? 6000 : 8000
-  );
+  // Set new intervals with much faster timing for testing
+  hungerInterval = setInterval(decreaseHunger, 2000);
+  energyInterval = setInterval(decreaseEnergy, 2000);
+  hygieneInterval = setInterval(decreaseHygiene, 2000);
+  happinessInterval = setInterval(decreaseHappiness, 2000);
 
-  energyInterval = setInterval(
-    () => {
-      decreaseEnergy();
-      warning();
-    },
-    currentPet.active ? 8000 : 12000
-  );
-
-  hygieneInterval = setInterval(
-    () => {
-      decreaseHygiene();
-      warning();
-    },
-    currentPet.clean ? 18000 : 15000
-  );
-
-  happinessInterval = setInterval(
-    () => {
-      decreaseHappiness();
-      warning();
-    },
-    currentPet.clingy ? 8000 : 10000
-  );
-
-  console.log("Intervals updated for pet:", currentPet.intro);
+  console.log("Intervals set:", {
+    hungerInterval,
+    energyInterval,
+    hygieneInterval,
+    happinessInterval,
+  });
 }
 
 // Pause game function
@@ -194,20 +214,6 @@ function bathePet(personality) {
 }
 
 function bedtime(personality) {
-  const petImage = document.querySelector(".pet-image");
-  if (petImage) {
-    // Store the current image to return to
-    const currentImage = petImage.src;
-
-    // Show sleeping animation
-    petImage.src = "../images/Sleep.PNG";
-
-    // After 3 seconds, restore the previous state
-    setTimeout(() => {
-      updatePetImage();
-    }, 3000);
-  }
-
   gainStatus("energy"); // Always increase energy
   if (personality.active) {
     loseStatus("happiness");
@@ -371,13 +377,11 @@ function showGameOver() {
   else if (hygiene <= 0) reason = "Your pet died from poor hygiene!";
   else if (happiness <= 0) reason = "Your pet died from sadness!";
 
-  // Update pet image to dead state
+  // Hide the pet image
   const petImage = document.querySelector(".pet-image");
-  if (petImage) {
-    petImage.src = "../images/Fuckingdead.PNG";
-  }
+  if (petImage) petImage.style.display = "none";
 
-  console.log("GAME OVER: " + reason);
+  // Show game over screen
   document.getElementById("gameOverMessage").textContent = reason;
   document.getElementById("gameOverScreen").style.display = "flex";
 }
@@ -422,8 +426,15 @@ function updateStatusBars() {
   document.getElementById("happiness-fill").style.width = happiness + "%";
   document.getElementById("hygiene-fill").style.width = hygiene + "%";
 
-  // Update pet image based on status
-  updatePetImage();
+  // Update the percentage display
+  document.getElementById("hunger-value").textContent =
+    Math.round(hunger) + "%";
+  document.getElementById("energy-value").textContent =
+    Math.round(energy) + "%";
+  document.getElementById("happiness-value").textContent =
+    Math.round(happiness) + "%";
+  document.getElementById("hygiene-value").textContent =
+    Math.round(hygiene) + "%";
 }
 
 // Override console.log to update UI
@@ -493,26 +504,20 @@ function updatePetImage() {
   const petImage = document.querySelector(".pet-image");
   if (!petImage) return;
 
-  // Check if any status is 0 (dead)
-  if (hunger <= 0 || energy <= 0 || hygiene <= 0 || happiness <= 0) {
-    petImage.src = "../images/Fuckingdead.PNG";
-    return;
-  }
-
   // Check for multiple states
-  if (hunger <= 50 && hygiene <= 50 && energy <= 50) {
+  if (hunger <= 30 && hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 50 && hygiene <= 50) {
+  } else if (hunger <= 30 && hygiene <= 30) {
     petImage.src = "../images/Dirty:hungry.PNG";
-  } else if (hunger <= 50 && energy <= 50) {
+  } else if (hunger <= 30 && energy <= 30) {
     petImage.src = "../images/Hungry:Tired.PNG";
-  } else if (hygiene <= 50 && energy <= 50) {
+  } else if (hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Tired.PNG";
-  } else if (energy <= 50) {
+  } else if (energy <= 30) {
     petImage.src = "../images/Sleepy.PNG";
-  } else if (hunger <= 50) {
+  } else if (hunger <= 30) {
     petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 50) {
+  } else if (hygiene <= 30) {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";

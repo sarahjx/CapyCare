@@ -72,7 +72,8 @@ function getRandomPersonality() {
 // Personality-based status decrease functions
 function decreaseHunger() {
   if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.foodLover ? 15 : 10;
+  // Food lovers get hungry faster, but not as fast as before
+  const decreaseAmount = currentPet.foodLover ? 5 : 3;
   hunger = Math.max(0, hunger - decreaseAmount);
   updateStatusBars();
   if (hunger === 0 && checkGameOver()) return;
@@ -80,7 +81,8 @@ function decreaseHunger() {
 
 function decreaseEnergy() {
   if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.active ? 15 : 10;
+  // Active pets lose energy faster, but not as fast as before
+  const decreaseAmount = currentPet.active ? 5 : 3;
   energy = Math.max(0, energy - decreaseAmount);
   updateStatusBars();
   if (energy === 0 && checkGameOver()) return;
@@ -88,7 +90,8 @@ function decreaseEnergy() {
 
 function decreaseHygiene() {
   if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.clean ? 8 : 12;
+  // Clean pets lose hygiene slower
+  const decreaseAmount = currentPet.clean ? 3 : 4;
   hygiene = Math.max(0, hygiene - decreaseAmount);
   updateStatusBars();
   if (hygiene === 0 && checkGameOver()) return;
@@ -96,7 +99,8 @@ function decreaseHygiene() {
 
 function decreaseHappiness() {
   if (!currentPet || isGameOver) return;
-  const decreaseAmount = currentPet.clingy ? 15 : 10;
+  // Clingy pets lose happiness faster when not attended to, but not as fast as before
+  const decreaseAmount = currentPet.clingy ? 5 : 3;
   happiness = Math.max(0, happiness - decreaseAmount);
   updateStatusBars();
   if (happiness === 0 && checkGameOver()) return;
@@ -110,13 +114,13 @@ function updateIntervals() {
   if (hygieneInterval) clearInterval(hygieneInterval);
   if (happinessInterval) clearInterval(happinessInterval);
 
-  // Set new intervals based on personality
+  // Set new intervals based on personality (longer intervals)
   hungerInterval = setInterval(
     () => {
       decreaseHunger();
       warning();
     },
-    currentPet.foodLover ? 6000 : 8000
+    currentPet.foodLover ? 12000 : 15000
   );
 
   energyInterval = setInterval(
@@ -124,7 +128,7 @@ function updateIntervals() {
       decreaseEnergy();
       warning();
     },
-    currentPet.active ? 8000 : 12000
+    currentPet.active ? 15000 : 20000
   );
 
   hygieneInterval = setInterval(
@@ -132,7 +136,7 @@ function updateIntervals() {
       decreaseHygiene();
       warning();
     },
-    currentPet.clean ? 18000 : 15000
+    currentPet.clean ? 25000 : 20000
   );
 
   happinessInterval = setInterval(
@@ -140,7 +144,7 @@ function updateIntervals() {
       decreaseHappiness();
       warning();
     },
-    currentPet.clingy ? 8000 : 10000
+    currentPet.clingy ? 15000 : 20000
   );
 
   console.log("Intervals updated for pet:", currentPet.intro);
@@ -194,21 +198,15 @@ function bathePet(personality) {
 }
 
 function bedtime(personality) {
+  gainStatus("energy"); // Always increase energy
   const petImage = document.querySelector(".pet-image");
   if (petImage) {
-    // Store the current image to return to
-    const currentImage = petImage.src;
-
-    // Show sleeping animation
     petImage.src = "../images/Sleep.PNG";
-
-    // After 3 seconds, restore the previous state
+    // Reset to normal state after 3 seconds
     setTimeout(() => {
       updatePetImage();
     }, 3000);
   }
-
-  gainStatus("energy"); // Always increase energy
   if (personality.active) {
     loseStatus("happiness");
     console.log("Your pet is too energetic to sleep!");
@@ -371,13 +369,11 @@ function showGameOver() {
   else if (hygiene <= 0) reason = "Your pet died from poor hygiene!";
   else if (happiness <= 0) reason = "Your pet died from sadness!";
 
-  // Update pet image to dead state
+  // Hide the pet image
   const petImage = document.querySelector(".pet-image");
-  if (petImage) {
-    petImage.src = "../images/Fuckingdead.PNG";
-  }
+  if (petImage) petImage.style.display = "none";
 
-  console.log("GAME OVER: " + reason);
+  // Show game over screen
   document.getElementById("gameOverMessage").textContent = reason;
   document.getElementById("gameOverScreen").style.display = "flex";
 }
@@ -422,7 +418,17 @@ function updateStatusBars() {
   document.getElementById("happiness-fill").style.width = happiness + "%";
   document.getElementById("hygiene-fill").style.width = hygiene + "%";
 
-  // Update pet image based on status
+  // Update the percentage display
+  document.getElementById("hunger-value").textContent =
+    Math.round(hunger) + "%";
+  document.getElementById("energy-value").textContent =
+    Math.round(energy) + "%";
+  document.getElementById("happiness-value").textContent =
+    Math.round(happiness) + "%";
+  document.getElementById("hygiene-value").textContent =
+    Math.round(hygiene) + "%";
+
+  // Update pet image
   updatePetImage();
 }
 
@@ -493,26 +499,20 @@ function updatePetImage() {
   const petImage = document.querySelector(".pet-image");
   if (!petImage) return;
 
-  // Check if any status is 0 (dead)
-  if (hunger <= 0 || energy <= 0 || hygiene <= 0 || happiness <= 0) {
-    petImage.src = "../images/Fuckingdead.PNG";
-    return;
-  }
-
   // Check for multiple states
-  if (hunger <= 50 && hygiene <= 50 && energy <= 50) {
+  if (hunger <= 30 && hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 50 && hygiene <= 50) {
+  } else if (hunger <= 30 && hygiene <= 30) {
     petImage.src = "../images/Dirty:hungry.PNG";
-  } else if (hunger <= 50 && energy <= 50) {
+  } else if (hunger <= 30 && energy <= 30) {
     petImage.src = "../images/Hungry:Tired.PNG";
-  } else if (hygiene <= 50 && energy <= 50) {
+  } else if (hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Tired.PNG";
-  } else if (energy <= 50) {
+  } else if (energy <= 30) {
     petImage.src = "../images/Sleepy.PNG";
-  } else if (hunger <= 50) {
+  } else if (hunger <= 30) {
     petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 50) {
+  } else if (hygiene <= 30) {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";

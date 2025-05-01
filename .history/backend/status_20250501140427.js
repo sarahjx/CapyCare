@@ -374,7 +374,7 @@ function showGameOver() {
   // Update pet image to dead state
   const petImage = document.querySelector(".pet-image");
   if (petImage) {
-    petImage.src = "../images/Fuckingdead.PNG";
+    petImage.src = "../images/Fuckingdead";
   }
 
   console.log("GAME OVER: " + reason);
@@ -493,26 +493,20 @@ function updatePetImage() {
   const petImage = document.querySelector(".pet-image");
   if (!petImage) return;
 
-  // Check if any status is 0 (dead)
-  if (hunger <= 0 || energy <= 0 || hygiene <= 0 || happiness <= 0) {
-    petImage.src = "../images/Fuckingdead.PNG";
-    return;
-  }
-
   // Check for multiple states
-  if (hunger <= 50 && hygiene <= 50 && energy <= 50) {
+  if (hunger <= 30 && hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 50 && hygiene <= 50) {
+  } else if (hunger <= 30 && hygiene <= 30) {
     petImage.src = "../images/Dirty:hungry.PNG";
-  } else if (hunger <= 50 && energy <= 50) {
+  } else if (hunger <= 30 && energy <= 30) {
     petImage.src = "../images/Hungry:Tired.PNG";
-  } else if (hygiene <= 50 && energy <= 50) {
+  } else if (hygiene <= 30 && energy <= 30) {
     petImage.src = "../images/Dirty:Tired.PNG";
-  } else if (energy <= 50) {
+  } else if (energy <= 30) {
     petImage.src = "../images/Sleepy.PNG";
-  } else if (hunger <= 50) {
+  } else if (hunger <= 30) {
     petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 50) {
+  } else if (hygiene <= 30) {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";

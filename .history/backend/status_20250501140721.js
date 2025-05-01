@@ -512,7 +512,7 @@ function updatePetImage() {
     petImage.src = "../images/Sleepy.PNG";
   } else if (hunger <= 50) {
     petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 50) {
+  } else if (hygiene <= 30) {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";

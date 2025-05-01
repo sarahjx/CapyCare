@@ -84,7 +84,7 @@ body {
 .status-progress {
   width: 200px;
   height: 20px;
-  background-color: #ffffff;
+  background-color: #fffdfd;
   border-radius: 10px;
   overflow: hidden;
   position: relative;

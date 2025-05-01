@@ -194,20 +194,6 @@ function bathePet(personality) {
 }
 
 function bedtime(personality) {
-  const petImage = document.querySelector(".pet-image");
-  if (petImage) {
-    // Store the current image to return to
-    const currentImage = petImage.src;
-
-    // Show sleeping animation
-    petImage.src = "../images/Sleep.PNG";
-
-    // After 3 seconds, restore the previous state
-    setTimeout(() => {
-      updatePetImage();
-    }, 3000);
-  }
-
   gainStatus("energy"); // Always increase energy
   if (personality.active) {
     loseStatus("happiness");
@@ -291,7 +277,7 @@ function loseStatus(category) {
         console.log("Happiness is empty!");
         happiness = 0;
       } else if (happiness > 0) {
-        happiness -= 3;
+        happiness -= 10;
         console.log("Happiness: " + happiness);
       }
       break;
@@ -371,13 +357,11 @@ function showGameOver() {
   else if (hygiene <= 0) reason = "Your pet died from poor hygiene!";
   else if (happiness <= 0) reason = "Your pet died from sadness!";
 
-  // Update pet image to dead state
+  // Hide the pet image
   const petImage = document.querySelector(".pet-image");
-  if (petImage) {
-    petImage.src = "../images/Fuckingdead.PNG";
-  }
+  if (petImage) petImage.style.display = "none";
 
-  console.log("GAME OVER: " + reason);
+  // Show game over screen
   document.getElementById("gameOverMessage").textContent = reason;
   document.getElementById("gameOverScreen").style.display = "flex";
 }
@@ -421,9 +405,6 @@ function updateStatusBars() {
   document.getElementById("energy-fill").style.width = energy + "%";
   document.getElementById("happiness-fill").style.width = happiness + "%";
   document.getElementById("hygiene-fill").style.width = hygiene + "%";
-
-  // Update pet image based on status
-  updatePetImage();
 }
 
 // Override console.log to update UI
@@ -488,33 +469,3 @@ function reset() {
 }
 
 updateDisplay();
-
-function updatePetImage() {
-  const petImage = document.querySelector(".pet-image");
-  if (!petImage) return;
-
-  // Check if any status is 0 (dead)
-  if (hunger <= 0 || energy <= 0 || hygiene <= 0 || happiness <= 0) {
-    petImage.src = "../images/Fuckingdead.PNG";
-    return;
-  }
-
-  // Check for multiple states
-  if (hunger <= 50 && hygiene <= 50 && energy <= 50) {
-    petImage.src = "../images/Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 50 && hygiene <= 50) {
-    petImage.src = "../images/Dirty:hungry.PNG";
-  } else if (hunger <= 50 && energy <= 50) {
-    petImage.src = "../images/Hungry:Tired.PNG";
-  } else if (hygiene <= 50 && energy <= 50) {
-    petImage.src = "../images/Dirty:Tired.PNG";
-  } else if (energy <= 50) {
-    petImage.src = "../images/Sleepy.PNG";
-  } else if (hunger <= 50) {
-    petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 50) {
-    petImage.src = "../images/Dirty.PNG";
-  } else {
-    petImage.src = "../images/Idle.PNG";
-  }
-}
