@@ -1,0 +1,174 @@
+/** @format */
+
+:root {
+  --primary-color: #f9d9d9;
+  --secondary-color: #d9e7f9;
+  --tertiary-color: #fff1fb;
+  --accent-color: #f7efd7;
+  --text-color: #333;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  --font-family: "McLaren", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0 auto;
+  padding: 20px;
+  background-image: url("../images/room.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.pet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-image {
+  transform: scale(0.3);
+  position: fixed;
+  margin-top: 1200px;
+}
+
+.status-bar-container {
+  position: fixed;
+  background-color: var(--primary-color);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-flex;
+  flex-direction: column;
+  bottom: 4%;
+  left: 2%;
+}
+
+.status-icon-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.hunger-icon,
+.energy-icon,
+.happiness-icon,
+.hygiene-icon {
+  width: 10px;
+  height: auto;
+  margin-right: 30px;
+}
+
+.status-bar {
+  margin: 0;
+}
+
+.status-label {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.status-progress {
+  width: 200px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.status-fill {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.status-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.status-value {
+  min-width: 50px;
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+.action-buttons {
+  margin-top: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 15px;
+  background-color: var(--primary-color);
+  position: fixed;
+  right: 2%;
+  bottom: 4%;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 6rem;
+  font-family: var(--font-family);
+  font-weight: 7pt;
+  font-size: var(--font-size-xl);
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.warning {
+  color: #ff9800;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.critical {
+  color: #f44336;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#gameOverScreen {
+  display: hidden;
+  position: fixed;
+
+}
