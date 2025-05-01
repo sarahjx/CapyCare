@@ -1,0 +1,106 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/statusbar.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Button Section -->
+      <div class="buttons">
+        <button class="action-btn" onclick="feedPet(currentPet)">Feed</button>
+        <button class="action-btn" onclick="bathePet(currentPet)">Bathe</button>
+        <button class="action-btn" onclick="bedtime(currentPet)">Sleep</button>
+        <button class="action-btn" onclick="touchPet(currentPet)">Play</button>
+        <button id="pauseButton" class="action-btn" onclick="togglePause()">
+          Pause
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Bar Container -->
+    <div class="status-bar-container">
+      <div class="status-row">
+        <img src="../images/hunger.svg" alt="Hunger Icon" class="status-icon" />
+        <div class="bar">
+          <div class="status-fill" id="hunger-fill"></div>
+        </div>
+        <span id="hunger-value">100%</span>
+      </div>
+      <div class="status-row">
+        <img src="../images/energy.svg" alt="Energy Icon" class="status-icon" />
+        <div class="bar">
+          <div class="status-fill" id="energy-fill"></div>
+        </div>
+        <span id="energy-value">100%</span>
+      </div>
+      <div class="status-row">
+        <img
+          src="../images/happiness.svg"
+          alt="Happiness Icon"
+          class="status-icon"
+        />
+        <div class="bar">
+          <div class="status-fill" id="happiness-fill"></div>
+        </div>
+        <span id="happiness-value">100%</span>
+      </div>
+      <div class="status-row">
+        <img
+          src="../images/hygiene.svg"
+          alt="Hygiene Icon"
+          class="status-icon"
+        />
+        <div class="bar">
+          <div class="status-fill" id="hygiene-fill"></div>
+        </div>
+        <span id="hygiene-value">100%</span>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="game-over" style="display: none">
+      <h2 id="gameOverMessage"></h2>
+      <button onclick="resetGame()">Start New Game</button>
+    </div>
+
+    <script src="../backend/status.js"></script>
+    <script>
+      // Update bars in real-time
+      function updateBars() {
+        if (!isPaused) {
+          document.getElementById("hunger-fill").style.width = `${hunger}%`;
+          document.getElementById("energy-fill").style.width = `${energy}%`;
+          document.getElementById(
+            "happiness-fill"
+          ).style.width = `${happiness}%`;
+          document.getElementById("hygiene-fill").style.width = `${hygiene}%`;
+
+          document.getElementById("hunger-value").textContent = `${Math.round(
+            hunger
+          )}%`;
+          document.getElementById("energy-value").textContent = `${Math.round(
+            energy
+          )}%`;
+          document.getElementById(
+            "happiness-value"
+          ).textContent = `${Math.round(happiness)}%`;
+          document.getElementById("hygiene-value").textContent = `${Math.round(
+            hygiene
+          )}%`;
+        }
+      }
+
+      // Update every second
+      setInterval(updateBars, 1000);
+
+      // Initial update
+      updateBars();
+    </script>
+  </body>
+</html>

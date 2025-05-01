@@ -1,0 +1,73 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/statusbar.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Button Section -->
+      <div class="buttons">
+        <button class="action-btn" onclick="feedPet(mix1)">Feed</button>
+        <button class="action-btn" onclick="bathePet(mix1)">Bathe</button>
+        <button class="action-btn" onclick="bedtime(mix1)">Sleep</button>
+        <button class="action-btn" onclick="touchPet(mix1)">Play</button>
+      </div>
+    </div>
+
+    <!-- Status Bar Container -->
+    <div class="status-bar-container">
+      <!-- Top Bar: Hunger and Energy -->
+      <div class="status-row">
+        <img src="images/hunger.svg" alt="Hunger Icon" class="status-icon" />
+        <div class="bar" id="hunger-bar">
+          <div class="status-fill"></div>
+        </div>
+        <span id="hunger-value">100%</span>
+      </div>
+      <div class="status-row">
+        <img src="images/energy.svg" alt="Energy Icon" class="status-icon" />
+        <div class="bar" id="energy-bar">
+          <div class="status-fill"></div>
+        </div>
+        <span id="energy-value">100%</span>
+      </div>
+
+      <!-- Bottom Bar: Happiness and Hygiene -->
+      <div class="status-row">
+        <img
+          src="images/happiness.svg"
+          alt="Happiness Icon"
+          class="status-icon"
+        />
+        <div class="bar" id="happiness-bar">
+          <div class="status-fill"></div>
+        </div>
+        <span id="happiness-value">100%</span>
+      </div>
+      <div class="status-row">
+        <img src="images/hygiene.svg" alt="Hygiene Icon" class="status-icon" />
+        <div class="bar" id="hygiene-bar">
+          <div class="status-fill"></div>
+        </div>
+        <span id="hygiene-value">100%</span>
+      </div>
+    </div>
+
+    <script src="backend/status.js"></script>
+    <script>
+      // Update bars in real-time
+      setInterval(() => {
+        document.getElementById("hunger-bar").style.width = `${hunger}%`;
+        document.getElementById("energy-bar").style.width = `${energy}%`;
+        document.getElementById("happiness-bar").style.width = `${happiness}%`;
+        document.getElementById("hygiene-bar").style.width = `${hygiene}%`;
+      }, 1000);
+    </script>
+  </body>
+</html>

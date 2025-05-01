@@ -1,0 +1,72 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="../css/statusbar.css" />
+  </head>
+  <body>
+      <h1>Virtual Pet Status</h1>
+
+      <div class="status-bar">
+        <span class="status-label">Hunger:</span>
+        <div class="status-progress">
+          <div id="hunger-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="hunger-value">70%</span>
+        <div id="hunger-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Energy:</span>
+        <div class="status-progress">
+          <div id="energy-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="energy-value">70%</span>
+        <div id="energy-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Hygiene:</span>
+        <div class="status-progress">
+          <div id="hygiene-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="hygiene-value">70%</span>
+        <div id="hygiene-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <span class="status-label">Happiness:</span>
+        <div class="status-progress">
+          <div id="happiness-bar" class="status-fill" style="width: 70%"></div>
+        </div>
+        <span id="happiness-value">70%</span>
+        <div id="happiness-warning" class="warning"></div>
+      </div>
+
+      <div class="action-buttons">
+        <button onclick="feedPet(currentPet)">Feed</button>
+        <button onclick="bathePet(currentPet)">Bathe</button>
+        <button onclick="bedtime(currentPet)">Sleep</button>
+        <button onclick="touchPet(currentPet)">Play</button>
+      </div>
+      <button id="pauseButton" onclick="togglePause()" class="pause-button">
+        Pause
+      </button>
+    </div>
+
+    <div id="gameOverScreen" class="game-over-screen">
+      <div class="game-over-content">
+        <h2>Game Over</h2>
+        <p id="gameOverMessage"></p>
+        <button onclick="resetGame()">Get a New Pet</button>
+      </div>
+    </div>
+
+    <script src="../backend/status.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,221 @@
+/** @format */
+
+:root {
+  --primary-color: #f9d9d9;
+  --secondary-color: #d9e7f9;
+  --tertiary-color: #fff1fb;
+  --accent-color: #f7efd7;
+  --text-color: #333;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  --font-family: "McLaren", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.status-bar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgb(249, 185, 243);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  bottom: 20px;
+  left: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.status-icon-container {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.status-bar {
+  margin: 10px 0;
+}
+
+.status-label {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+}
+
+.status-progress {
+  width: 200px;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.status-fill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+#hunger-value,
+#energy-value,
+#happiness-value,
+#hygiene-value {
+  min-width: 50px;
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.action-buttons {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background-color: #ff9800;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.action-buttons.hidden {
+  display: none;
+}
+
+#toggle-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  background-color: #ff9800;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#toggle-button.hidden {
+  display: none;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: 120px;
+}
+
+.action-btn:hover {
+  background-color: #45a049;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 6rem;
+  font-family: var(--font-family);
+  font-weight: 7pt;
+  font-size: var(--font-size-xl);
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.warning {
+  color: #ff9800;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.critical {
+  color: #f44336;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 1000;
+}
+
+.game-over h2 {
+  color: #f44336;
+  margin-bottom: 1rem;
+}
+
+.game-over button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.game-over button:hover {
+  background-color: #45a049;
+}
+
+#pauseButton {
+  background-color: #ff9800;
+}
+
+#pauseButton:hover {
+  background-color: #f57c00;
+}
+
+#pauseButton.paused {
+  background-color: #4caf50;
+}
+
+#pauseButton.paused:hover {
+  background-color: #45a049;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Pet Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/statusbar.css" />
+  </head>
+  <body>
+    <div class="status-bar-container">
+
+      <div class="status-bar">
+        <div class="status-icon-container">
+        <span class="hunger-icon"><img src="../images/hunger.svg" alt="hunger icon"></span>
+        <span class="status-label">Hunger:</span>
+        </div>
+        <div class="status-progress">
+          <div id="hunger-bar" class="status-fill"></div>
+        </div>
+        <span id="hunger-value">100%</span>
+        <div id="hunger-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-icon-container">
+        <span class="energy-icon"><img src="../images/energy.svg" alt="energy icon"></span>
+        <span class="status-label">Energy:</span>
+        </div>
+        <div class="status-progress">
+          <div id="energy-bar" class="status-fill"></div>
+        </div>
+        <span id="energy-value">100%</span>
+        <div id="energy-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-icon-container">
+        <span class="hygiene-icon"><img src="../images/hygiene.svg" alt="hygiene icon"></span>
+        <span class="status-label">Hygiene:</span>
+        </div>
+        <div class="status-progress">
+          <div id="hygiene-bar" class="status-fill"></div>
+        </div>
+        <span id="hygiene-value">100%</span>
+        <div id="hygiene-warning" class="warning"></div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-icon-container">
+        <span class="happiness-icon"><img src="../images/happiness.svg" alt="happiness icon"></span>
+        <span class="status-label">Happiness:</span>
+        </div>
+        <div class="status-progress">
+          <div id="happiness-bar" class="status-fill"></div>
+        </div>
+        <span id="happiness-value">100%</span>
+        <div id="happiness-warning" class="warning"></div>
+      </div>
+    </div id="menu-wraper">
+    <button id="toggle-button">Action</button>
+
+      <div class="action-buttons" id="button-column">
+        <button onclick="feedPet(currentPet)">Feed</button>
+        <button onclick="bathePet(currentPet)">Bathe</button>
+        <button onclick="bedtime(currentPet)">Sleep</button>
+        <button onclick="touchPet(currentPet)">Play</button>
+      </div>
+      <button id="pauseButton" onclick="togglePause()" class="pause-button">
+        Pause
+      </button>
+    </div>
+
+    <div id="gameOverScreen" class="game-over-screen">
+      <div class="game-over-content">
+        <h2>Game Over</h2>
+        <p id="gameOverMessage"></p>
+        <button onclick="resetGame()">Get a New Pet</button>
+      </div>
+    </div>
+
+    <script src="../backend/status.js"></script>
+  </body>
+</html>
