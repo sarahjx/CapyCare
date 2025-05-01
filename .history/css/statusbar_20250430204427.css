@@ -1,3 +1,4 @@
+/** @format */
 
 :root {
   --primary-color: #f9d9d9;
@@ -24,7 +25,7 @@ body {
   font-family: var(--font-family);
   margin: 0 auto;
   padding: 20px;
-  background-image: url('../images/room.png');
+  background-image: url('../images/room.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -41,12 +42,12 @@ body {
 .pet-image {
   transform: scale(0.3);
   position: fixed;
-  margin-top: 1200px;
+  margin-top: 00px;
 }
 
 .status-bar-container {
   position: fixed;
-  background-color: var(--primary-color);
+  background-color: rgb(249, 185, 243);
   padding: 20px;
   border-radius: 10px;
   display: inline-flex;
@@ -58,27 +59,17 @@ body {
 .status-icon-container {
   display: flex;
   align-items: center;
-  margin-bottom: 0;
-}
-
-.hunger-icon,
-.energy-icon,
-.happiness-icon,
-.hygiene-icon {
-  width: 10px;
-  height: auto;
-  margin-right: 30px;
+  margin-bottom: 10px;
 }
 
 .status-bar {
-  margin: 0;
+  margin: 10px 0;
 }
 
 .status-label {
   display: inline-block;
   width: 100px;
   font-weight: bold;
-  margin: 0;
 }
 
 .status-progress {
@@ -123,10 +114,10 @@ body {
   margin-top: 20px;
   display: inline-flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   gap: 15px;
-  background-color: var(--primary-color);
+  background-color: #ff9800;
   position: fixed;
   right: 2%;
   bottom: 4%;

@@ -1,3 +1,4 @@
+/** @format */
 
 :root {
   --primary-color: #f9d9d9;
@@ -24,7 +25,7 @@ body {
   font-family: var(--font-family);
   margin: 0 auto;
   padding: 20px;
-  background-image: url('../images/room.png');
+  background-image: url('../images/room.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -61,13 +62,9 @@ body {
   margin-bottom: 0;
 }
 
-.hunger-icon,
-.energy-icon,
-.happiness-icon,
-.hygiene-icon {
-  width: 10px;
+.status-icon {
+  width: 0px;
   height: auto;
-  margin-right: 30px;
 }
 
 .status-bar {
