@@ -66,7 +66,6 @@ function getRandomPersonality() {
   const randomIndex = Math.floor(Math.random() * personalities.length);
   currentPet = personalities[randomIndex];
   console.log("New pet initialized:", currentPet.intro);
-  updatePersonalityDescription();
   return currentPet;
 }
 
@@ -439,32 +438,7 @@ window.addEventListener("load", function () {
   initializeGame();
   // Update status bars every second
   setInterval(updateStatusBars, 1000);
-  // Set up personality button
-  setupPersonalityButton();
 });
-
-function setupPersonalityButton() {
-  const button = document.getElementById("personalityButton");
-  button.addEventListener("click", showPersonalityPopup);
-  updatePersonalityDescription();
-}
-
-function showPersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "flex";
-}
-
-function closePersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "none";
-}
-
-function updatePersonalityDescription() {
-  const description = document.getElementById("personalityDescription");
-  if (currentPet) {
-    description.textContent = currentPet.intro;
-  }
-}
 
 // stopwatch
 

@@ -66,7 +66,6 @@ function getRandomPersonality() {
   const randomIndex = Math.floor(Math.random() * personalities.length);
   currentPet = personalities[randomIndex];
   console.log("New pet initialized:", currentPet.intro);
-  updatePersonalityDescription();
   return currentPet;
 }
 
@@ -439,32 +438,7 @@ window.addEventListener("load", function () {
   initializeGame();
   // Update status bars every second
   setInterval(updateStatusBars, 1000);
-  // Set up personality button
-  setupPersonalityButton();
 });
-
-function setupPersonalityButton() {
-  const button = document.getElementById("personalityButton");
-  button.addEventListener("click", showPersonalityPopup);
-  updatePersonalityDescription();
-}
-
-function showPersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "flex";
-}
-
-function closePersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "none";
-}
-
-function updatePersonalityDescription() {
-  const description = document.getElementById("personalityDescription");
-  if (currentPet) {
-    description.textContent = currentPet.intro;
-  }
-}
 
 // stopwatch
 
@@ -542,26 +516,8 @@ function updatePetImage() {
     return;
   }
 
-  // Check for multiple states with sadness
-  if (hunger <= 60 && hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 60 && hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
-  } else if (hunger <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry:Tired.PNG";
-  } else if (hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Tired.PNG";
-  } else if (energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Tired.PNG";
-  } else if (hunger <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry.PNG";
-  } else if (hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty.PNG";
-  } else if (happiness <= 60) {
-    petImage.src = "../images/Sad.PNG";
-  }
-  // Check for multiple states without sadness
-  else if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
+  // Check for multiple states
+  if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
   } else if (hunger <= 60 && hygiene <= 60) {
     petImage.src = "../images/Dirty:hungry.PNG";

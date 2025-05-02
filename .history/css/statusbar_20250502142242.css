@@ -304,7 +304,7 @@ button:hover {
 .close-button {
   background-color: #4caf50;
   color: white;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -312,6 +312,3 @@ button:hover {
   font-size: var(--font-size-md);
 }
 
-.close-button:hover {
-  background-color: #45a049;
-}

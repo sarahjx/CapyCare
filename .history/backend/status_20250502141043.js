@@ -66,7 +66,6 @@ function getRandomPersonality() {
   const randomIndex = Math.floor(Math.random() * personalities.length);
   currentPet = personalities[randomIndex];
   console.log("New pet initialized:", currentPet.intro);
-  updatePersonalityDescription();
   return currentPet;
 }
 
@@ -197,15 +196,33 @@ function bathePet(personality) {
 function bedtime(personality) {
   const petImage = document.querySelector(".pet-image");
   if (petImage) {
+    // Show sleeping animation based on conditions
+    if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
+      petImage.src = "../images/Sleeping:Dirty:Hungry:Tired.PNG";
+    } else if (hunger <= 60 && hygiene <= 60) {
+      petImage.src = "../images/Sleeping:Dirty:Hungry.PNG";
+    } else if (hunger <= 60 && energy <= 60) {
+      petImage.src = "../images/Sleeping:Hungry:Tired.PNG";
+    } else if (hygiene <= 60 && energy <= 60) {
+      petImage.src = "../images/Sleeping:Dirty:Tired.PNG";
+    } else if (energy <= 60) {
+      petImage.src = "../images/Sleeping:Tired.PNG";
+    } else if (hunger <= 60) {
+      petImage.src = "../images/Sleeping:Hungry.PNG";
+    } else if (hygiene <= 60) {
+      petImage.src = "../images/Sleeping:Dirty.PNG";
+    } else {
+      petImage.src = "../images/Sleeping.PNG";
+    }
+
     document.body.style.backgroundImage = "url('../images/LightsOff.PNG')";
     document.getElementById("bedtimeOverlay").style.display = "block";
-    updatePetImage(); // This will now show the correct sleeping state
 
     // After 3 seconds, restore the previous state
     setTimeout(() => {
+      updatePetImage();
       document.body.style.backgroundImage = "url('../images/LightsOn.PNG')";
       document.getElementById("bedtimeOverlay").style.display = "none";
-      updatePetImage(); // This will restore the normal state
     }, 3000);
   }
 
@@ -394,7 +411,9 @@ function resetGame() {
 function togglePause() {
   isPaused = !isPaused;
   const pauseButton = document.getElementById("pauseButton");
-  const buttons = document.querySelectorAll(".action-button:not(#pauseButton)");
+  const buttons = document.querySelectorAll(
+    ".buttons button:not(#pauseButton)"
+  );
 
   if (isPaused) {
     pauseButton.textContent = "Resume";
@@ -439,32 +458,7 @@ window.addEventListener("load", function () {
   initializeGame();
   // Update status bars every second
   setInterval(updateStatusBars, 1000);
-  // Set up personality button
-  setupPersonalityButton();
 });
-
-function setupPersonalityButton() {
-  const button = document.getElementById("personalityButton");
-  button.addEventListener("click", showPersonalityPopup);
-  updatePersonalityDescription();
-}
-
-function showPersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "flex";
-}
-
-function closePersonalityPopup() {
-  const popup = document.getElementById("personalityPopup");
-  popup.style.display = "none";
-}
-
-function updatePersonalityDescription() {
-  const description = document.getElementById("personalityDescription");
-  if (currentPet) {
-    description.textContent = currentPet.intro;
-  }
-}
 
 // stopwatch
 
@@ -515,24 +509,7 @@ function updatePetImage() {
 
   // Check if it's bedtime (overlay is visible)
   if (document.getElementById("bedtimeOverlay").style.display === "block") {
-    // Show sleeping animation based on conditions
-    if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
-      petImage.src = "../images/Sleeping:Dirty:Hungry:Tired.PNG";
-    } else if (hunger <= 60 && hygiene <= 60) {
-      petImage.src = "../images/Sleeping:Dirty:Hungry.PNG";
-    } else if (hunger <= 60 && energy <= 60) {
-      petImage.src = "../images/Sleeping:Hungry:Tired.PNG";
-    } else if (hygiene <= 60 && energy <= 60) {
-      petImage.src = "../images/Sleeping:Dirty:Tired.PNG";
-    } else if (energy <= 60) {
-      petImage.src = "../images/Sleeping:Tired.PNG";
-    } else if (hunger <= 60) {
-      petImage.src = "../images/Sleeping:Hungry.PNG";
-    } else if (hygiene <= 60) {
-      petImage.src = "../images/Sleeping:Dirty.PNG";
-    } else {
-      petImage.src = "../images/Sleeping.PNG";
-    }
+    petImage.src = "../images/Sleeping.PNG";
     return;
   }
 
@@ -542,26 +519,8 @@ function updatePetImage() {
     return;
   }
 
-  // Check for multiple states with sadness
-  if (hunger <= 60 && hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 60 && hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
-  } else if (hunger <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry:Tired.PNG";
-  } else if (hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Tired.PNG";
-  } else if (energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Tired.PNG";
-  } else if (hunger <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry.PNG";
-  } else if (hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty.PNG";
-  } else if (happiness <= 60) {
-    petImage.src = "../images/Sad.PNG";
-  }
-  // Check for multiple states without sadness
-  else if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
+  // Check for multiple states
+  if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
   } else if (hunger <= 60 && hygiene <= 60) {
     petImage.src = "../images/Dirty:hungry.PNG";
