@@ -260,6 +260,7 @@ button:hover {
   width: 100px;
   height: auto;
   transition: transform 0.3s ease;
+  background-color: none;
 }
 
 .personality-button:hover .personality-icon {

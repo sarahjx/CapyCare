@@ -347,6 +347,7 @@ button:hover {
 
 .name-input-content input {
   width: 100%;
+  padding: 10px;
   margin-bottom: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
@@ -357,6 +358,7 @@ button:hover {
 .name-input-content button {
   background-color: #4caf50;
   color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -372,8 +374,8 @@ button:hover {
 /* Pet Name Display */
 .pet-name {
   position: absolute;
-  top: 90px;
-  left: 5%;
+  top: 120px;
+  left: 10%;
   transform: translateX(-50%);
   background-color: var(--primary-color);
   padding: 5px 15px;

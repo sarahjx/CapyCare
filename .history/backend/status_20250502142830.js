@@ -381,12 +381,18 @@ function showGameOver() {
 
 function resetGame() {
   isGameOver = false;
-  isPaused = false;
+  hunger = 100;
+  energy = 100;
+  hygiene = 100;
+  happiness = 100;
+  document.getElementById("gameOverOverlay").style.display = "none";
+  document.querySelector(".game-over-content").style.display = "none";
+  currentPet = getRandomPersonality();
   updateStatusBars();
   updateIntervals();
   // Show name input popup again
   document.getElementById("nameInputPopup").style.display = "flex";
-  document.getElementById("petName").textContent = "";
+  document.querySelector(".pet-info-container").style.display = "none";
 }
 
 function togglePause() {
@@ -436,6 +442,8 @@ function toggleActions() {
 window.addEventListener("load", function () {
   // Show name input popup first
   document.getElementById("nameInputPopup").style.display = "flex";
+  // Hide personality button until name is set
+  document.querySelector(".pet-info-container").style.display = "none";
 });
 
 function setupPersonalityButton() {
@@ -575,18 +583,15 @@ function updatePetImage() {
   }
 }
 
-// Set pet name function
 function setPetName() {
   const nameInput = document.getElementById("petNameInput");
   const name = nameInput.value.trim();
 
   if (name) {
     petName = name;
-    const nameElement = document.getElementById("petName");
-    nameElement.textContent = petName;
-    // Make the name clickable
-    nameElement.onclick = showPersonalityPopup;
+    document.getElementById("petName").textContent = petName;
     document.getElementById("nameInputPopup").style.display = "none";
+    document.querySelector(".pet-info-container").style.display = "flex";
     initializeGame();
     // Update status bars every second
     setInterval(updateStatusBars, 1000);

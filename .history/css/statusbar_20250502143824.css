@@ -264,6 +264,7 @@ button:hover {
 
 .personality-button:hover .personality-icon {
   transform: scale(1.1);
+  
 }
 
 .personality-popup {

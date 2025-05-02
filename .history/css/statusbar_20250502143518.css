@@ -347,6 +347,7 @@ button:hover {
 
 .name-input-content input {
   width: 100%;
+  padding: 10px;
   margin-bottom: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
@@ -357,16 +358,13 @@ button:hover {
 .name-input-content button {
   background-color: #4caf50;
   color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-family: var(--font-family);
   font-size: var(--font-size-md);
   transition: background-color 0.3s ease;
-}
-
-.name-input-content button:hover {
-  background-color: #45a049;
 }
 
 /* Pet Name Display */

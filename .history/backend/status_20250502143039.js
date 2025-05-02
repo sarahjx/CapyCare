@@ -44,7 +44,6 @@ let hygiene = 100;
 let happiness = 100;
 let isGameOver = false;
 let isPaused = false;
-let petName = "";
 
 // Store interval IDs globally
 let hungerInterval = null;
@@ -381,12 +380,15 @@ function showGameOver() {
 
 function resetGame() {
   isGameOver = false;
-  isPaused = false;
+  hunger = 100;
+  energy = 100;
+  hygiene = 100;
+  happiness = 100;
+  document.getElementById("gameOverOverlay").style.display = "none";
+  document.querySelector(".game-over-content").style.display = "none";
+  currentPet = getRandomPersonality();
   updateStatusBars();
   updateIntervals();
-  // Show name input popup again
-  document.getElementById("nameInputPopup").style.display = "flex";
-  document.getElementById("petName").textContent = "";
 }
 
 function togglePause() {
@@ -434,8 +436,11 @@ function toggleActions() {
 
 // Initialize the game when the page loads
 window.addEventListener("load", function () {
-  // Show name input popup first
-  document.getElementById("nameInputPopup").style.display = "flex";
+  initializeGame();
+  // Update status bars every second
+  setInterval(updateStatusBars, 1000);
+  // Set up personality button
+  setupPersonalityButton();
 });
 
 function setupPersonalityButton() {
@@ -572,27 +577,5 @@ function updatePetImage() {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";
-  }
-}
-
-// Set pet name function
-function setPetName() {
-  const nameInput = document.getElementById("petNameInput");
-  const name = nameInput.value.trim();
-
-  if (name) {
-    petName = name;
-    const nameElement = document.getElementById("petName");
-    nameElement.textContent = petName;
-    // Make the name clickable
-    nameElement.onclick = showPersonalityPopup;
-    document.getElementById("nameInputPopup").style.display = "none";
-    initializeGame();
-    // Update status bars every second
-    setInterval(updateStatusBars, 1000);
-    // Set up personality button
-    setupPersonalityButton();
-  } else {
-    alert("Please enter a name for your pet!");
   }
 }

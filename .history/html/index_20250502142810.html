@@ -12,24 +12,27 @@
     <link rel="stylesheet" href="../css/statusbar.css" />
   </head>
   <body>
+
+    <div class="pet-container">
+      <img src="../images/Idle.PNG" alt="Pet" class="pet-image" />
+    </div>
+
     <!-- Name Input Popup -->
     <div id="nameInputPopup" class="name-input-popup">
       <div class="name-input-content">
         <h2>Name Your Pet</h2>
-        <input type="text" id="petNameInput" placeholder="Enter pet name" maxlength="20">
-        <button onclick="setPetName()">Start Game</button>
+        <input type="text" id="petNameInput" placeholder="Enter pet's name" maxlength="15">
+        <button onclick="setPetName()" class="name-submit-button">Start Game</button>
       </div>
     </div>
 
-    <div class="pet-container">
-      <img src="../images/Idle.PNG" alt="Pet" class="pet-image" />
-      <div id="petName" class="pet-name"></div>
-    </div>
-
     <!-- Personality Info Button and Popup -->
-    <button id="personalityButton" class="personality-button">
-      <img src="../images/peticon.PNG" alt="Pet Info" class="personality-icon">
-    </button>
+    <div class="pet-info-container">
+      <button id="personalityButton" class="personality-button">
+        <img src="../images/peticon.PNG" alt="Pet Info" class="personality-icon">
+      </button>
+      <h3 id="petName" class="pet-name"></h3>
+    </div>
     <div id="personalityPopup" class="personality-popup">
       <div class="personality-content">
         <h2>Pet Personality</h2>

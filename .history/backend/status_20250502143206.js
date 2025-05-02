@@ -381,12 +381,22 @@ function showGameOver() {
 
 function resetGame() {
   isGameOver = false;
-  isPaused = false;
+  hunger = 100;
+  energy = 100;
+  hygiene = 100;
+  happiness = 100;
+  document.getElementById("gameOverOverlay").style.display = "none";
+  document.querySelector(".game-over-content").style.display = "none";
+  currentPet = getRandomPersonality();
   updateStatusBars();
   updateIntervals();
   // Show name input popup again
   document.getElementById("nameInputPopup").style.display = "flex";
-  document.getElementById("petName").textContent = "";
+  document.querySelector(".pet-info-container").style.display = "none";
+  // Hide status bars and action buttons until name is set
+  document.querySelector(".status-bar-container").style.display = "none";
+  document.querySelector(".action-buttons").style.display = "none";
+  document.getElementById("pauseButton").style.display = "none";
 }
 
 function togglePause() {
@@ -436,6 +446,12 @@ function toggleActions() {
 window.addEventListener("load", function () {
   // Show name input popup first
   document.getElementById("nameInputPopup").style.display = "flex";
+  // Hide personality button until name is set
+  document.querySelector(".pet-info-container").style.display = "none";
+  // Hide status bars and action buttons until name is set
+  document.querySelector(".status-bar-container").style.display = "none";
+  document.querySelector(".action-buttons").style.display = "none";
+  document.getElementById("pauseButton").style.display = "none";
 });
 
 function setupPersonalityButton() {
@@ -575,7 +591,6 @@ function updatePetImage() {
   }
 }
 
-// Set pet name function
 function setPetName() {
   const nameInput = document.getElementById("petNameInput");
   const name = nameInput.value.trim();
@@ -587,6 +602,12 @@ function setPetName() {
     // Make the name clickable
     nameElement.onclick = showPersonalityPopup;
     document.getElementById("nameInputPopup").style.display = "none";
+    document.querySelector(".pet-info-container").style.display = "flex";
+    // Show status bars and action buttons
+    document.querySelector(".status-bar-container").style.display =
+      "inline-flex";
+    document.querySelector(".action-buttons").style.display = "inline-flex";
+    document.getElementById("pauseButton").style.display = "block";
     initializeGame();
     // Update status bars every second
     setInterval(updateStatusBars, 1000);
