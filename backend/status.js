@@ -112,13 +112,13 @@ function updateIntervals() {
   if (hygieneInterval) clearInterval(hygieneInterval);
   if (happinessInterval) clearInterval(happinessInterval);
 
-  // Set new intervals based on personality
+  // Set new intervals based on personality (reduced for demo)
   hungerInterval = setInterval(
     () => {
       decreaseHunger();
       warning();
     },
-    currentPet.foodLover ? 6000 : 8000
+    currentPet.foodLover ? 1500 : 2000 // Reduced from 6000/8000
   );
 
   energyInterval = setInterval(
@@ -126,7 +126,7 @@ function updateIntervals() {
       decreaseEnergy();
       warning();
     },
-    currentPet.active ? 15000 : 20000
+    currentPet.active ? 3750 : 5000 // Reduced from 15000/20000
   );
 
   hygieneInterval = setInterval(
@@ -134,7 +134,7 @@ function updateIntervals() {
       decreaseHygiene();
       warning();
     },
-    currentPet.clean ? 10000 : 8000
+    currentPet.clean ? 2500 : 2000 // Reduced from 10000/8000
   );
 
   happinessInterval = setInterval(
@@ -142,7 +142,7 @@ function updateIntervals() {
       decreaseHappiness();
       warning();
     },
-    currentPet.clingy ? 8000 : 10000
+    currentPet.clingy ? 2000 : 2500 // Reduced from 8000/10000
   );
 
   console.log("Intervals updated for pet:", currentPet.intro);
