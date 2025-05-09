@@ -386,7 +386,7 @@ function resetGame() {
   updateIntervals();
   // Redirect to landing page
   window.location.href = "landing.html";
-}
+}gti
 
 function togglePause() {
   isPaused = !isPaused;

@@ -384,8 +384,9 @@ function resetGame() {
   isPaused = false;
   updateStatusBars();
   updateIntervals();
-  // Redirect to landing page
-  window.location.href = "landing.html";
+  // Show name input popup again
+  document.getElementById("nameInputPopup").style.display = "flex";
+  document.getElementById("petName").textContent = "";
 }
 
 function togglePause() {
