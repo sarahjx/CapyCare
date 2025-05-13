@@ -521,9 +521,9 @@ function updatePetImage() {
     } else if (hunger <= 60 && energy <= 60) {
       petImage.src = "../images/Sleeping:Hungry:Tired.PNG";
     } else if (hygiene <= 60 && energy <= 60) {
-      petImage.src = "../images/Sleeping:Dirty.PNG";
+      petImage.src = "../images/Sleeping:Dirty:PNG";
     } else if (energy <= 60) {
-      petImage.src = "../images/Sleeping.PNG";
+      petImage.src = "../images/Sleeping:Tired.PNG";
     } else if (hunger <= 60) {
       petImage.src = "../images/Sleeping:Hungry.PNG";
     } else if (hygiene <= 60) {
@@ -542,7 +542,7 @@ function updatePetImage() {
 
   // Check for multiple states with sadness
   if (hunger <= 60 && hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
+    petImage.src = "../images/Sad:Dirty:Hungry:Tired.PNG";
   } else if (hunger <= 60 && hygiene <= 60 && happiness <= 60) {
     petImage.src = "../images/Sad:Dirty:Hungry.PNG";
   } else if (hunger <= 60 && energy <= 60 && happiness <= 60) {

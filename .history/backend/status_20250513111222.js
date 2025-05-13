@@ -384,9 +384,8 @@ function resetGame() {
   isPaused = false;
   updateStatusBars();
   updateIntervals();
-  // Show name input popup again
-  document.getElementById("nameInputPopup").style.display = "flex";
-  document.getElementById("petName").textContent = "";
+  // Redirect to landing page
+  window.location.href = "landing.html";
 }
 
 function togglePause() {
@@ -511,20 +510,12 @@ function updatePetImage() {
     return;
   }
 
-  // Check if it's bedtime (overlay is visible)
-  if (document.getElementById("bedtimeOverlay").style.display === "block") {
-    // Show sleeping animation based on conditions
-    if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
+  if (isSleeping) {
+    if (isDirty && isHungry) {
       petImage.src = "../images/Sleeping:Dirty:hungry.PNG";
-    } else if (hunger <= 60 && hygiene <= 60) {
-      petImage.src = "../images/Sleeping:Dirty:hungry.PNG";
-    } else if (hunger <= 60 && energy <= 60) {
-      petImage.src = "../images/Sleeping:Hungry:Tired.PNG";
-    } else if (hygiene <= 60 && energy <= 60) {
+    } else if (isDirty) {
       petImage.src = "../images/Sleeping:Dirty.PNG";
-    } else if (energy <= 60) {
-      petImage.src = "../images/Sleeping.PNG";
-    } else if (hunger <= 60) {
+    } else if (isHungry) {
       petImage.src = "../images/Sleeping:Hungry.PNG";
     } else if (hygiene <= 60) {
       petImage.src = "../images/Sleeping:Dirty.PNG";
@@ -534,44 +525,34 @@ function updatePetImage() {
     return;
   }
 
-  // Check if any status is 0 (dead)
-  if (hunger <= 0 || energy <= 0 || hygiene <= 0 || happiness <= 0) {
-    petImage.src = "../images/Fuckingdead.PNG";
+  if (isSad) {
+    if (isDirty && isHungry) {
+      petImage.src = "../images/Sad:Dirty:Hungry.PNG";
+    } else if (isDirty) {
+      petImage.src = "../images/Sad:Dirty.PNG";
+    } else if (isHungry) {
+      petImage.src = "../images/Sad:Hungry.PNG";
+    } else if (isTired) {
+      petImage.src = "../images/Sad:Tired.PNG";
+    } else {
+      petImage.src = "../images/Sad.PNG";
+    }
     return;
   }
 
-  // Check for multiple states with sadness
-  if (hunger <= 60 && hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
-  } else if (hunger <= 60 && hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
-  } else if (hunger <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry:Tired.PNG";
-  } else if (hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Tired.PNG";
-  } else if (energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Tired.PNG";
-  } else if (hunger <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Hungry.PNG";
-  } else if (hygiene <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty.PNG";
-  } else if (happiness <= 60) {
-    petImage.src = "../images/Sad.PNG";
-  }
-  // Check for multiple states without sadness
-  else if (hunger <= 60 && hygiene <= 60 && energy <= 60) {
+  if (isDirty && isHungry && isTired) {
     petImage.src = "../images/Dirty:Hungry:Tired.PNG";
-  } else if (hunger <= 60 && hygiene <= 60) {
+  } else if (isDirty && isHungry) {
     petImage.src = "../images/Dirty:hungry.PNG";
-  } else if (hunger <= 60 && energy <= 60) {
+  } else if (isHungry && isTired) {
     petImage.src = "../images/Hungry:Tired.PNG";
-  } else if (hygiene <= 60 && energy <= 60) {
+  } else if (isDirty && isTired) {
     petImage.src = "../images/Dirty:Tired.PNG";
-  } else if (energy <= 60) {
+  } else if (isTired) {
     petImage.src = "../images/Sleepy.PNG";
-  } else if (hunger <= 60) {
+  } else if (isHungry) {
     petImage.src = "../images/Hungry.PNG";
-  } else if (hygiene <= 60) {
+  } else if (isDirty) {
     petImage.src = "../images/Dirty.PNG";
   } else {
     petImage.src = "../images/Idle.PNG";

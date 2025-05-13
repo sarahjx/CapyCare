@@ -542,7 +542,7 @@ function updatePetImage() {
 
   // Check for multiple states with sadness
   if (hunger <= 60 && hygiene <= 60 && energy <= 60 && happiness <= 60) {
-    petImage.src = "../images/Sad:Dirty:Hungry.PNG";
+    petImage.src = "../images/Sad:Dirty:Hungry:Tired.PNG";
   } else if (hunger <= 60 && hygiene <= 60 && happiness <= 60) {
     petImage.src = "../images/Sad:Dirty:Hungry.PNG";
   } else if (hunger <= 60 && energy <= 60 && happiness <= 60) {
